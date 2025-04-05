@@ -25,7 +25,7 @@ from cijak import Cijak
 cijak_encoding = Cijak()
 data = b'Hello, World!' # You can replace this with any binary data
 encoded_data = cijak_encoding.encode(data)
-print(encoded_data) # ㇈怙擆羼稠毛蔦羐漀
+print(encoded_data) # ㇈怙擆羼稠蔦羐漀
 
 decoded_data = cijak_encoding.decode(encoded_data)
 print(decoded_data) # b'Hello, World!'
