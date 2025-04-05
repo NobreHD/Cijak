@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cijak"
+version = "0.1.0"
+authors = [
+  { name = "NobreHD", email = "info@nobrehd.pt" }
+]
+description = "A Unicode-based encoding and decoding library"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/NobreHD/Cijak"
+Issues = "https://github.com/NobreHD/Cijak/issues"
