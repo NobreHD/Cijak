@@ -38,9 +38,9 @@ class BitWriter:
     return self.data.to_bytes(byte_length, 'big')
 
 class Cijak:
-  def __init__(self, start_data=0x4E00, end_data=0x9FFF, marker_base=0x31C0):
-    self.start_data = start_data
-    self.bit_range = math.floor(math.log2(end_data - start_data + 1))
+  def __init__(self, unicode_range_start=0x4E00, unicode_range_end=0x9FFF, marker_base=0x31C0):
+    self.unicode_range_start = unicode_range_start
+    self.bit_range = math.floor(math.log2(unicode_range_end - unicode_range_start + 1))
     self.marker_base = marker_base
 
   def encode(self, data: bytes) -> str:
@@ -51,13 +51,13 @@ class Cijak:
     result = []
 
     while bit_reader.can_read(self.bit_range):
-      result.append(chr(self.start_data + bit_reader.read(self.bit_range)))
+      result.append(chr(self.unicode_range_start + bit_reader.read(self.bit_range)))
 
     remaining_bits, size = bit_reader.read_remaining_bits()
     padding_bits = (self.bit_range - size) % self.bit_range
     if size > 0:
       remaining_bits <<= padding_bits
-      result.append(chr(self.start_data + remaining_bits))
+      result.append(chr(self.unicode_range_start + remaining_bits))
 
     return chr(self.marker_base + padding_bits) + "".join(result)
 
@@ -76,9 +76,9 @@ class Cijak:
     padding_bits = marker - self.marker_base
 
     for char in data[1:-1]:
-      bit_writer.write(ord(char) - self.start_data, self.bit_range)
+      bit_writer.write(ord(char) - self.unicode_range_start, self.bit_range)
 
-    remaining_bits = ord(data[-1]) - self.start_data
+    remaining_bits = ord(data[-1]) - self.unicode_range_start
     if padding_bits > 0:
       remaining_bits >>= padding_bits
     bit_writer.write(remaining_bits, self.bit_range - padding_bits)
