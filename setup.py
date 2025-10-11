@@ -11,7 +11,7 @@ setup(
     ext_modules=[
         Extension(
             'cijak._native',
-            sources=['cijak/_native.c'],
+            sources=['_native.c'],
             extra_compile_args=extra_compile_args,
             optional=True,  # Build won't fail if C compilation fails
         )
