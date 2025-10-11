@@ -223,13 +223,13 @@ static PyTypeObject CijakType = {
 
 static PyModuleDef cijakmodule = {
   PyModuleDef_HEAD_INIT,
-  .m_name = "cijak",
+  .m_name = "_native",  // Changed from "cijak"
   .m_doc = "Fast Cijak encoding/decoding module",
   .m_size = -1,
 };
 
 PyMODINIT_FUNC
-PyInit_cijak(void)
+PyInit__native(void)
 {
   PyObject *m;
   
