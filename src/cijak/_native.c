@@ -219,11 +219,12 @@ static PyTypeObject CijakType = {
   .tp_init = (initproc) Cijak_init,
   .tp_dealloc = (destructor) Cijak_dealloc,
   .tp_methods = Cijak_methods,
+  .tp_getset = Cijak_getsetters,
 };
 
 static PyModuleDef cijakmodule = {
   PyModuleDef_HEAD_INIT,
-  .m_name = "_native",  // Changed from "cijak"
+  .m_name = "_native", 
   .m_doc = "Fast Cijak encoding/decoding module",
   .m_size = -1,
 };
