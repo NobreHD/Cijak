@@ -12,6 +12,7 @@ jobs:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-13, macos-14]
 
@@ -21,14 +22,14 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.16.5
         env:
-          CIBW_BUILD: cp38-* cp39-* cp310-* cp311-* cp312-*
+          CIBW_BUILD: cp38-* cp39-* cp310-* cp311-* cp312-* cp313-*
           CIBW_SKIP: "*-musllinux_i686 *-manylinux_i686 *-win32"
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: "pytest {project}/tests -v"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}
+          name: wheels-${{ matrix.os }}-${{ strategy.job-index }}
           path: ./wheelhouse/*.whl
 
   build_sdist:
@@ -47,16 +48,35 @@ jobs:
           name: sdist
           path: dist/*.tar.gz
 
+  check_dist:
+    name: Check distribution before upload
+    needs: [build_wheels, build_sdist]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist/
+          merge-multiple: true
+
+      - name: List distributions
+        run: ls -lh dist/
+
+      - name: Check distributions with twine
+        run: |
+          pip install twine
+          twine check dist/*
+
   pypi-publish:
     name: Upload to PyPI
-    needs: [build_wheels, build_sdist]
+    needs: [check_dist]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
 
     environment:
       name: pypi
-      url: https://pypi.org/project/cijak/${{ github.event.release.tag_name }}
+      url: https://pypi.org/p/cijak
 
     steps:
       - name: Download all artifacts

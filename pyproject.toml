@@ -18,15 +18,19 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: C",
-  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
   "Operating System :: OS Independent",
   "Development Status :: 5 - Production/Stable",
 ]
+license = {text = "GPL-3.0-or-later"}
 
 [project.urls]
 Homepage = "https://github.com/NobreHD/Cijak"
 Issues = "https://github.com/NobreHD/Cijak/issues"
+
+[tool.setuptools]
+license-files = ["LICENSE"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
