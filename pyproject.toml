@@ -1,22 +1,47 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [project]
 name = "cijak"
-version = "0.1.0"
+version = "1.0.0"
 authors = [
   { name = "NobreHD", email = "info@nobrehd.pt" }
 ]
-description = "A Unicode-based encoding and decoding library"
+description = "A high-performance Unicode-based encoding library with C extensions"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 classifiers = [
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: C",
   "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
   "Operating System :: OS Independent",
+  "Development Status :: 5 - Production/Stable",
 ]
 
 [project.urls]
 Homepage = "https://github.com/NobreHD/Cijak"
 Issues = "https://github.com/NobreHD/Cijak/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cijak"]
+
+[tool.hatch.build.targets.wheel.hooks.custom]
+path = "hatch_build.py"
+
+[tool.cibuildwheel]
+build = "cp38-* cp39-* cp310-* cp311-* cp312-*"
+skip = "*-musllinux_i686 *-manylinux_i686 *-win32"
+test-requires = "pytest"
+test-command = "pytest {project}/tests"
+
+[tool.cibuildwheel.linux]
+before-all = "yum install -y gcc || apt-get install -y gcc"
+
+[tool.cibuildwheel.macos]
+before-all = "brew install gcc || true"
