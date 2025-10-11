@@ -14,7 +14,7 @@ class CustomBuildHook(BuildHookInterface):
     # Define the C extension
     ext = Extension(
       'cijak._native',
-      sources=['src/cijak/_native.c'],
+      sources=['cijak/_native.c'],
       extra_compile_args=['-O3'] if sys.platform != 'win32' else ['/O2'],
     )
 
