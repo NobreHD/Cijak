@@ -29,9 +29,6 @@ license = {text = "GPL-3.0-or-later"}
 Homepage = "https://github.com/NobreHD/Cijak"
 Issues = "https://github.com/NobreHD/Cijak/issues"
 
-[tool.setuptools]
-license-files = ["LICENSE"]
-
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["cijak*"]
