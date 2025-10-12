@@ -19,8 +19,8 @@ Benchmarked on 3.7KB of binary data:
 |--------|-----------|--------|-------------------------|
 | **Encode** | 4.21 μs | 3.78 μs | 1340 μs |
 | **Decode** | 5.24 μs | 8.19 μs | 1338 μs |
-| **Character count** | 2,120 | 4,944 | 2,120 |
-| **Character compression** | **57%** | 133% | --- |
+| **Character count** | 2,120 | 4,944 | --- |
+| **Character compression** | **43%** | -33% | --- |
 | **UTF-8 size** | 6,360 B | 4,944 B | --- |
 | **UTF-16 size** | **4,242 B** | 9,890 B | --- |
 
@@ -36,7 +36,7 @@ Pre-compiled wheels are available for:
 - **Linux** (x86_64, aarch64)
 - **macOS** (Intel, Apple Silicon)  
 - **Windows** (x86_64)
-- **Python 3.8-3.12**
+- **Python 3.8-3.13**
 
 If a wheel isn't available for your platform, the package automatically falls back to a pure Python implementation (~300x slower, but functionally identical).
 
