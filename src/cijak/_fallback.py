@@ -47,7 +47,6 @@ class Cijak:
     "_unicode_range_end",
     "_bit_range",
     "_marker_base",
-    "_max_code",
     "_mask",
   )
 
@@ -60,7 +59,6 @@ class Cijak:
     if not 1 <= self._bit_range <= 16:
       raise ValueError("Bit range needs to be between 1 and 16")
     self._marker_base = marker_base
-    self._max_code = unicode_range_end - unicode_range_start
     self._mask = (1 << self._bit_range) - 1
 
   @property
