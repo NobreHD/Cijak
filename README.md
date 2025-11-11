@@ -36,7 +36,7 @@ Pre-compiled wheels are available for:
 - **Linux** (x86_64, aarch64)
 - **macOS** (Intel, Apple Silicon)  
 - **Windows** (x86_64)
-- **Python 3.8-3.13**
+- **Python 3.8-3.14**
 
 If a wheel isn't available for your platform, the package automatically falls back to a pure Python implementation (~300x slower, but functionally identical).
 
