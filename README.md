@@ -85,17 +85,6 @@ encoded = encoder.encode(data)
 
 **Important**: The Unicode range must not contain control characters. The library automatically calculates the optimal bit-packing based on your range size.
 
-### Check Current Implementation
-
-```python
-from cijak import get_implementation
-
-impl = get_implementation()
-print(impl)  # 'native' or 'fallback'
-```
-
-If you see `'fallback'`, you're using the pure Python version. Consider installing build tools to enable the C extension for 300x speedup.
-
 ## Technical Deep Dive
 
 ### Encoding Scheme
